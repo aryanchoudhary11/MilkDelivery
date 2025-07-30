@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const RoutePreferencesForm = () => {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [formData, setFormData] = useState({
     preferredDeliveryTime: "",
     instructions: "",
@@ -20,7 +21,7 @@ const RoutePreferencesForm = () => {
 
     try {
       await axios.put(
-        `http://localhost:5000/api/users/route-preferences/${userId}`,
+        `${API_BASE_URL}/api/users/route-preferences/${userId}`,
         formData
       );
       alert("Preferences updated!");

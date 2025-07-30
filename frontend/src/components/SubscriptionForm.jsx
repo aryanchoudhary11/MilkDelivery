@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 
 const SubscriptionForm = ({ userId }) => {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [milkType, setMilkType] = useState("Cow");
   const [quantity, setQuantity] = useState(1);
   const [plan, setPlan] = useState("Daily");
@@ -10,12 +11,9 @@ const SubscriptionForm = ({ userId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(
-        `http://localhost:5000/api/users/subscription/${userId}`,
-        {
-          subscription: { milkType, quantity, plan },
-        }
-      );
+      await axios.put(`${API_BASE_URL}/api/users/subscription/${userId}`, {
+        subscription: { milkType, quantity, plan },
+      });
       setMessage("✅ Subscription updated successfully!");
     } catch (err) {
       setMessage("❌ Failed to update subscription");

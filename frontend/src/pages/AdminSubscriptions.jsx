@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const AdminSubscriptions = () => {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [subscriptions, setSubscriptions] = useState([]);
 
   useEffect(() => {
@@ -9,7 +10,7 @@ const AdminSubscriptions = () => {
       try {
         const token = localStorage.getItem("token"); // Assuming token is stored in localStorage
         const response = await axios.get(
-          "http://localhost:5000/api/admin/subscriptions",
+          `${API_BASE_URL}/api/admin/subscriptions`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

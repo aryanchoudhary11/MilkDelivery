@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const DeliverySchedule = () => {
   const [schedule, setSchedule] = useState([]);
 
@@ -12,7 +14,7 @@ const DeliverySchedule = () => {
 
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/delivery/schedule/${userId}`
+          `${API_BASE_URL}/api/delivery/schedule/${userId}`
         );
         setSchedule(res.data.schedule);
       } catch (err) {

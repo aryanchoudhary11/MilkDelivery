@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const Subscribe = () => {
   const [formData, setFormData] = useState({
     plan: "",
@@ -33,7 +34,7 @@ const Subscribe = () => {
       }
 
       const response = await axios.post(
-        "http://localhost:5000/api/subscribe",
+        `${API_BASE_URL}/api/subscribe`,
         formData,
         {
           headers: {

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 function AdminDashboard() {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [subscriptions, setSubscriptions] = useState([]);
 
   useEffect(() => {
@@ -9,14 +10,11 @@ function AdminDashboard() {
       try {
         const token = localStorage.getItem("token");
 
-        const res = await axios.get(
-          "http://localhost:5000/api/admin/subscriptions",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const res = await axios.get(`${API_BASE_URL}/api/admin/subscriptions`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         setSubscriptions(res.data);
       } catch (err) {

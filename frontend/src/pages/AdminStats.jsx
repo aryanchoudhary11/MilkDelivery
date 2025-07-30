@@ -2,18 +2,15 @@ import React, { useEffect, useState } from "react";
 
 const AdminStats = () => {
   const [subscriptions, setSubscriptions] = useState([]);
-
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   useEffect(() => {
     const fetchSubscriptions = async () => {
       try {
-        const res = await fetch(
-          "http://localhost:5000/api/admin/subscriptions",
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
+        const res = await fetch(`${API_BASE_URL}/api/admin/subscriptions`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
 
         const data = await res.json();
         setSubscriptions(data);

@@ -4,6 +4,7 @@ import DeliverySchedule from "../components/DeliverySchedule";
 import RoutePreferencesForm from "../components/RoutePreferencesForm";
 
 const DashboardPage = () => {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [user, setUser] = useState(null);
   const [formData, setFormData] = useState({
     plan: "",
@@ -16,7 +17,7 @@ const DashboardPage = () => {
       try {
         const userId = localStorage.getItem("userId");
         const res = await axios.get(
-          `http://localhost:5000/api/users/profile/${userId}`
+          `${API_BASE_URL}/api/users/profile/${userId}`
         );
         setUser(res.data);
         if (res.data.subscription) {
@@ -38,7 +39,7 @@ const DashboardPage = () => {
     try {
       const userId = localStorage.getItem("userId");
       const res = await axios.put(
-        `http://localhost:5000/api/users/subscription/${userId}`,
+        `${API_BASE_URL}/api/users/subscription/${userId}`,
         formData
       );
       alert("Subscription updated!");
